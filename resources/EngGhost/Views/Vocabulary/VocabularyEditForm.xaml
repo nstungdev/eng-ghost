@@ -1,0 +1,57 @@
+﻿<Window x:Class="EngGhost.Views.Vocabulary.VocabularyEditForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EngGhost.Views.Vocabulary"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Từ vựng" Height="350" Width="700">
+    <StackPanel Margin="30">
+        <TextBlock TextAlignment="Center" Text="THÊM MỚI/CẬP NHẬT TỪ VỰNG" />
+        <Grid Margin="0 0 0 30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label Content="Từ" Grid.Column="0" Grid.Row="0" />
+            <TextBox x:Name="inp_Word" Grid.Column="1" Grid.Row="0" Height="20" />
+
+            <Label Content="Loại từ" Grid.Column="0" Grid.Row="1" />
+            <TextBox x:Name="inp_WordType" Grid.Column="1" Grid.Row="1" Height="20" />
+
+            <Label Content="Nghĩa" Grid.Column="0" Grid.Row="2" />
+            <TextBox x:Name="inp_Mean" Grid.Column="1" Grid.Row="2" Height="20" />
+
+            <Label Content="Phát âm" Grid.Column="0" Grid.Row="3" />
+            <TextBox x:Name="inp_Pronounce" Grid.Column="1" Grid.Row="3" Height="20" />
+
+            <Label Content="Chú thích" Grid.Column="0" Grid.Row="4" />
+            <TextBox x:Name="inp_Note" Grid.Column="1" Grid.Row="4" Height="60" />
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button Content="Hủy" Margin="0 0 10 0" Padding="10 5" />
+                <Button Content="Làm mới" Margin="0 0 10 0" Padding="10 5" />
+                <Button x:Name="btn_Save" Content="Xác nhận" Padding="10 5" Click="btn_Save_Click" />
+                <TextBlock x:Name="txt_Counter" />
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <ProgressBar Height="25" Name="pcb_Loading" Margin="0 10 0 0" IsIndeterminate="True" Visibility="Hidden" />
+            </Grid>
+        </Grid>
+    </StackPanel>
+</Window>

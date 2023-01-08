@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EngGhost"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Button Width="100" Height="50" Content="Từ vựng mới" Name="btn_createVocabulary" Click="btn_createVocabulary_Click" />
     </Grid>
 </Window>

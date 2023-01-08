@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EngGhost.Views.Vocabulary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace EngGhost
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btn_createVocabulary_Click(object sender, RoutedEventArgs e)
+        {
+            var vocabularyEditForm = new VocabularyEditForm();
+            vocabularyEditForm.ShowDialog();
         }
     }
 }
