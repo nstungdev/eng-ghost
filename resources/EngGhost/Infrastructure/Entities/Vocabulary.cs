@@ -11,7 +11,8 @@ namespace EngGhost.Infrastructure.Entities
     public class Vocabulary
     {
         [SQLiteIgnore(SQLiteIgnoreEnum.Insert)]
-        public int Id { get; set; }
+        [SQLiteColumn("id")]
+        public long Id { get; set; }
 
         [SQLiteColumn("word")]
         public string? Word { get; set; }

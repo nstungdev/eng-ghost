@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EngGhost.Infrastructure.DbSets
 {
-    public class DbSet<T> where T : class
+    public class DbSet<T> where T : class, new()
     {
         private readonly SQLiteConnection _conn;
         public DbSet()
@@ -21,9 +21,23 @@ namespace EngGhost.Infrastructure.DbSets
         {
             await OpenConnectionAsync();
             using var cmd = _conn.CreateCommand();
-            cmd.TransformToInsertCommand(entity);
+            cmd.ToInsertCommand(entity);
             int rows = await cmd.ExecuteNonQueryAsync();
             return rows;
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            await OpenConnectionAsync();
+            using var cmd = _conn.CreateCommand();
+            cmd.ToSelectCommand<T>();
+            using var rd = await cmd.ExecuteReaderAsync();
+            var results = new List<T>();
+            while (await rd.ReadAsync())
+            {
+                results.Add(rd.ConvertToObject<T>());
+            }
+            return results;
         }
 
         protected async Task OpenConnectionAsync()

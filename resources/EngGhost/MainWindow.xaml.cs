@@ -1,4 +1,5 @@
-﻿using EngGhost.Views.Vocabulary;
+﻿using EngGhost.Views.Pages;
+using EngGhost.Views.Vocabulary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +27,15 @@ namespace EngGhost
             InitializeComponent();
         }
 
-        private void btn_createVocabulary_Click(object sender, RoutedEventArgs e)
+        private void nav_vocabulary_Click(object sender, RoutedEventArgs e)
         {
-            var vocabularyEditForm = new VocabularyEditForm();
-            vocabularyEditForm.ShowDialog();
+            var vocabularyPage = new VocabularyOverview();
+            div_main.Content = vocabularyPage;
+        }
+
+        private void nav_tense_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

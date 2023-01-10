@@ -18,7 +18,13 @@ namespace EngGhost.Services
             _dbContext = EngGhostDbContext.Instance;
         }
 
-        public async Task CreateOne(VocabularyForm form)
+        public async Task<IEnumerable<Vocabulary>> GetVocabulariesAsync()
+        {
+            var vocabularies = await _dbContext.Vocabularies.GetAllAsync();
+            return vocabularies;
+        }
+
+        public async Task CreateOneAsync(VocabularyForm form)
         {
             #if DEBUG
             //await Task.Delay(1000);

@@ -45,7 +45,7 @@ namespace EngGhost.Views.Vocabulary
                 // start process
                 pcb_Loading.Visibility = Visibility.Visible;
                 TriggerControlWhenLoading(true);
-                await _vocabularyService.CreateOne(form);
+                await _vocabularyService.CreateOneAsync(form);
                 MessageBox.Show("Tạo mới thành công");
             }
             catch (Exception ex)

@@ -24,7 +24,7 @@ namespace EngGhost.Infrastructure.Helpers
         #endregion
 
         #region Main Method
-        public static void TransformToInsertCommand<T>(this SQLiteCommand command, T entity) where T : class
+        public static void ToInsertCommand<T>(this SQLiteCommand command, T entity) where T : class
         {
             var entityType = entity.GetType();
 
@@ -39,7 +39,7 @@ namespace EngGhost.Infrastructure.Helpers
                 foreach (var attr in propAttrs)
                 {
                     if (attr is SQLiteIgnore ignore && ignore.IgnoreEnum == SQLiteIgnoreEnum.Insert)
-                        continue;
+                        break;
                     
                     if (attr is SQLiteColumn sqliteColum)
                     {
@@ -64,5 +64,38 @@ namespace EngGhost.Infrastructure.Helpers
             }
         }
         #endregion
+
+        public static void ToSelectCommand<T>(this SQLiteCommand command) where T : class
+        {
+            var entityType = typeof(T);
+
+            var tableName = GetTableName(entityType);
+
+            var props = entityType.GetProperties();
+            var needSelectColumns = new List<(PropertyInfo, SQLiteColumn)>();
+
+            foreach (var prop in props)
+            {
+                var propAttrs = prop.GetCustomAttributes(true);
+                foreach (var attr in propAttrs)
+                {
+                    if (attr is SQLiteIgnore ignore && ignore.IgnoreEnum == SQLiteIgnoreEnum.Select)
+                        continue;
+
+                    if (attr is SQLiteColumn sqliteColum)
+                    {
+                        needSelectColumns.Add((prop, sqliteColum));
+                        break;
+                    }
+                }
+            }
+
+            string selectedColumnNames = string.Join(',', needSelectColumns.Select(e => e.Item2.Name));
+
+            string cmdText = $@"SELECT {selectedColumnNames} FROM {tableName}";
+
+            command.CommandText = cmdText;
+        }
+
     }
 }
